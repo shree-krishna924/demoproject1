@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modern Landing Page</title>
+  <style>
+    :root {
+      --bg: #fafbfc;
+      --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      --bg-card: #fff;
+      --text: #16181d;
+      --text-muted: #6b7280;
+      --primary: #6366f1;
+      --button-bg: #6366f1;
+      --button-text: #fff;
+      --shadow: 0 4px 32px rgba(0,0,0,0.1);
+    }
+    body[data-theme="dark"] {
+      --bg: #16181d;
+      --bg-gradient: linear-gradient(135deg, #23272f 0%, #16181d 100%);
+      --bg-card: #20232a;
+      --text: #fafbfc;
+      --text-muted: #94a3b8;
+      --primary: #a5b4fc;
+      --button-bg: #6366f1;
+      --button-text: #fff;
+      --shadow: 0 4px 32px rgba(0,0,0,0.3);
+    }
+    html, body {
+      padding: 0;
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text);
+      min-height: 100%;
+      transition: background 0.3s, color 0.3s;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 6vw 1.5rem 6vw;
+      background: transparent;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .dark-toggle {
+      border: none;
+      outline: none;
+      background: var(--bg-card);
+      padding: 0.5rem 0.9rem;
+      border-radius: 50px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: background 0.2s;
+      font-size: 1.2rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+    }
+    .dark-toggle svg {
+      width: 1.5em;
+      height: 1.5em;
+      margin-right: 0.4em;
+      fill: currentColor;
+      transition: fill 0.2s;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4rem;
+      min-height: 72vh;
+      padding: 2rem 6vw;
+    }
+    .content {
+      max-width: 560px;
+      width: 100%;
+      background: var(--bg-card);
+      border-radius: 1.7em;
+      box-shadow: var(--shadow);
+      padding: 2.5rem 2.7rem 2.8rem 2.7rem;
+      text-align: center;
+      transition: background 0.3s;
+    }
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 1.15rem;
+      background: linear-gradient(90deg, var(--primary) 20%, #3b82f6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    p {
+      color: var(--text-muted);
+      font-size: 1.22rem;
+      margin-bottom: 2.1rem;
+    }
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .cta-buttons a {
+      text-decoration: none;
+      padding: 0.82em 2em;
+      border-radius: 999px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: var(--button-bg);
+      color: var(--button-text);
+      box-shadow: 0 4px 24px rgba(99, 102, 241, 0.12);
+      transition: background 0.15s, color 0.15s, filter 0.21s;
+    }
+    .cta-buttons a.secondary {
+      background: transparent;
+      border: 2px solid var(--button-bg);
+      color: var(--primary);
+      filter: none;
+    }
+    .cta-buttons a:hover {
+      filter: brightness(1.08);
+      text-decoration: none;
+    }
+
+    /* --- Pricing Section Styles --- */
+    .pricing-section {
+      width: 100%;
+      max-width: 1000px;
+      text-align: center;
+    }
+    .pricing-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 2rem;
+    }
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      width: 100%;
+    }
+    .pricing-card {
+      background: var(--bg-card);
+      border-radius: 1.5rem;
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.2s, background 0.3s;
+    }
+    .pricing-card:hover {
+      transform: translateY(-5px);
+    }
+    .pricing-card.popular {
+      border: 2px solid var(--primary);
+    }
+    .popular-badge {
+      position: absolute;
+      top: -12px;
+      background: var(--primary);
+      color: #fff;
+      padding: 0.25rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .pricing-card h3 {
+      font-size: 1.5rem;
+      margin: 0 0 1rem 0;
+    }
+    .price {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+    .pricing-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem 0;
+      color: var(--text-muted);
+      line-height: 2;
+    }
+    .pricing-btn {
+      margin-top: auto;
+      text-decoration: none;
+      background: var(--button-bg);
+      color: var(--button-text);
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      width: 80%;
+      text-align: center;
+      transition: filter 0.15s;
+    }
+    .pricing-btn:hover {
+      filter: brightness(1.08);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      padding: 2rem 0 2rem 0;
+      letter-spacing: 0.02em;
+    }
+    @media (max-width: 600px) {
+      header, main, .content {
+        padding: 1.1rem 3vw;
+      }
+      .content {
+        padding: 1.3rem 0.85rem 2rem 0.85rem;
+      }
+      h1 {
+        font-size: 2.1rem;
+      }
+    }
+    @media (max-width: 400px) {
+      .content {
+        padding: 0.7rem 0.25rem 1.2rem 0.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="#" class="logo">Brandify</a>
+    <button class="dark-toggle" id="darkBtn" aria-label="Toggle dark mode">
+      <svg id="themeIcon" viewBox="0 0 24 24"></svg>
+      <span id="themeLabel">Dark Mode</span>
+    </button>
+  </header>
+  <main>
+    <section class="content">
+      <h1>Welcome to Brandify</h1>
+      <p>
+        Elevate your online presence with a stunning, modern landing page. Responsive. Accessible. Beautifully simple.<br>
+        <span style="color: var(--primary); font-weight: 600;">Ready to impress?</span>
+      </p>
+      <div class="cta-buttons">
+        <a href="#">Get Started</a>
+        <a href="#" class="secondary">Learn More</a>
+      </div>
+    </section>
+
+    <!-- FIXED: Moved inside main and completed missing text -->
+    <section class="pricing-section">
+      <h2 class="pricing-title">Choose Your Plan</h2>
+      <div class="pricing-cards">
+        <!-- Starter -->
+        <div class="pricing-card">
+          <h3>Starter</h3>
+          <div class="price">\$19</div>
+          <ul>
+            <li>Basic features</li>
+            <li>Email support</li>
+            <li>1 user</li>
+          </ul>
+          <a href="#" class="pricing-btn">Select</a>
+        </div>
+        <!-- Pro (Popular) -->
+        <div class="pricing-card popular">
+          <div class="popular-badge">Popular</div>
+          <h3>Pro</h3>
+          <div class="price">\$49</div>
+          <ul>
+            <li>All Starter features</li>
+            <li>Priority support</li>
+            <li>Up to 5 users</li>
+          </ul>
+          <a href="#" class="pricing-btn">Select</a>
+        </div>
+        <!-- Enterprise -->
+        <div class="pricing-card">
+          <h3>Enterprise</h3>
+          <div class="price">\$99</div>
+          <ul>
+            <li>All Pro features</li>
+            <li>24/7 dedicated support</li>
+            <li>Unlimited users</li>
+          </ul>
+          <a href="#" class="pricing-btn">Select</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; <span id="year"></span> Brandify. Crafted with <span style="color:var(--primary); font-style:normal;">♥</span>
+  </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const btn = document.getElementById('darkBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+
+    const sunIcon = `<path d="M12 2.25a.75.75 0 0 1 .75.75V5.5a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75zm0 16a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V19a.75.75 0 0 1 .75-.75zm9-6.75a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V13a.75.75 0 0 1 .75-.75zm-16 0a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V13a.75.75 0 0 1 .75-.75zm13.364-7.364a.75.75 0 0 1 1.06 0l1.591 1.591a.75.75 0 1 1-1.06 1.06l-1.59-1.59a.75.75 0 0 1 0-1.061zM3.636 18.364a.75.75 0 0 1 1.061 0l1.59 1.59a.75.75 0 1 1-1.06 1.06L3.637 19.425a.75.75 0 0 1 0-1.06zm13.364 13.364a.75.75 0 0 1 0 1.061l-1.591 1.591a.75.75 0 1 1-1.06-1.06l1.59-1.591a.75.75 0 0 1 1.061 0zM3.636 5.636a.75.75 0 0 1 0 1.061L2.045 8.288a.75.75 0 1 1-1.06-1.06l1.59-1.592a.75.75 0 0 1 1.061 0zm8.364 2.864a4.5 4.5 0 1 1 0 9a4.5 4.5 0 0 1 0-9zm0 1.5a3 3 0 1 0 0 6a3 3 0 0 0 0-6z"/>`;
+    const moonIcon = `<path d="M21.752 15.002A9.718 9.718 0 0 1 12.002 22C6.477 22 2 17.523 2 12S6.477 2 12.002 2a9.751 9.751 0 0 1 8.248 13.002zm-2.049.725a7.75 7.75 0 1 0-7.677 9.043 7.779 7.779 0 0 0 7.677-9.043z"/>`;
+
+    function setTheme(isDark) {
+      document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      themeIcon.innerHTML = isDark ? sunIcon : moonIcon;
+      themeLabel.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+    }
+    
+    function getPreferredTheme() {
+      const ls = localStorage.getItem('theme');
+      if (ls === 'dark') return true;
+      if (ls === 'light') return false;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    
+    let isDark = getPreferredTheme();
+    setTheme(isDark);
+
+    btn.addEventListener('click', () => {
+      isDark = !isDark;
+      setTheme(isDark);
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>
